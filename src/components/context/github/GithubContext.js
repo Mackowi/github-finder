@@ -8,6 +8,7 @@ const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
 export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
+    user: {},
     loading: false,
   }
 
@@ -28,6 +29,27 @@ export const GithubProvider = ({ children }) => {
     })
   }
 
+  // get single user (testing purposes)
+  const getUser = async (login) => {
+    setLoading()
+    const response = await fetch(`${GITHUB_URL}/users/${login}`)
+
+    console.log(`${GITHUB_URL}/users/${login}`)
+
+    if (response.status === 404) {
+      window.location = '/notfound'
+    } else {
+      const data = await response.json()
+
+      console.log(data)
+
+      dispatch({
+        type: 'GET_USER',
+        payload: data,
+      })
+    }
+  }
+
   const clearUsers = () => {
     dispatch({
       type: 'CLEAR_USERS',
@@ -42,8 +64,10 @@ export const GithubProvider = ({ children }) => {
     <GithubContext.Provider
       value={{
         users: state.users,
+        user: state.user,
         loading: state.loading,
         searchUsers,
+        getUser,
         clearUsers,
       }}
     >
