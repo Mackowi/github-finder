@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { GithubProvider } from './components/context/github/GithubContext'
-import { AlertProvider } from './components/context/alert/AlertContext'
+import { GithubProvider } from './context/github/GithubContext'
+import { AlertProvider } from './context/alert/AlertContext'
 import Home from './pages/Home'
 import About from './pages/About'
 import NotFound from './pages/NotFound'

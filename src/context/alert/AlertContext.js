@@ -19,7 +19,7 @@ export const AlertProvider = ({ children }) => {
         dispatch({
           type: 'REMOVE_ALERT',
         }),
-      300000
+      3000
     )
   }
 
